@@ -1,0 +1,5 @@
+1. To solve the problem of Object Relational Independence Mismatch as discussed earlier, there were certain solutions proposed:
+   a. jdbc
+   b. Spring jdbc
+   c. MyBatis
+

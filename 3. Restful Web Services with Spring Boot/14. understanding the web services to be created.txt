@@ -1,0 +1,21 @@
+1. REST is architecture of how you design your resources and how you expose them using HTTP.
+2. We will be building a social media application. The user can make a number of posts.
+   User -> Posts is 1:N relationship
+
+   a. Retrieve all users : GET/users
+   b. Create a user  : POST/users
+   c. Retrieve one user : GET/users/{id}
+   d. Delete a user : DELETE/users/{id}
+
+   e. Retrieve all posts for a user : GET/users/{id}/posts
+   f. Create a post for a user : POST/users/{id}/posts
+   g. Retrieve details of a post : GET/users/{id}/posts/{post_id}
+
+
+3. Imp: As posts cannot exist without a user, hence in 2g. point, we do not have GET/posts/{posts_id}
+   Instead we have GET/users/{id}/posts/{post_id}
+
+4. A corrolary for this is thar, there would be 2 SQL tables, User and Post. 1:N relationship would exist between User and Post.
+   Hence in Post table, we would have a foreign key user_id that would correspond to the primary user_id in User table.
+   Hence we can say a row in Post table cannot exist without a corresponding user alredy existing. 
+ 

@@ -1,0 +1,36 @@
+1. In the github repo of our Spring cloud config server, where we generated limits-service.properties:
+   We will add 2 more files 
+   limits-service-dev.properties &
+   limits-service-qa.properties
+
+2. Our aim is to configure the Spring cloud differently for different profiles like developer, QA etc.
+
+3. limits-service-dev.properties:
+   limits-service.minimum=100
+   limits-service.maximum=900
+
+   limits-service-qa.properties:
+   limits-service.minimum=200
+   limits-service.maximum=800
+
+4. Now our Spring cloud config server has support for various profiles and is connected to our github repo.
+   To verify this:
+   http://localhost:8888/limits-service/default
+   http://localhost:8888/limits-service/qa
+   http://localhost:8888/limits-service/dev
+
+5. Next step is to enable this profiles option for our limits microservice as well.
+
+Go into limits server project and open application.properties.
+
+spring.profiles.active = qa
+spring.cloud.config.profile=qa
+
+http://localhost:8080/limits
+
+Now the JSON returned by the above page, reflects the values coming in from the limits-service-qa.properties that we had setup
+in the github repo. 
+
+6. Advantage of doing all this is that whenever a new microservice gets added/deleted then we need to add files or delete files
+   from the github repo only. That singlehandedly would be able to steer us clear from all the configuration hassles that
+   we might face otherwise.

@@ -1,0 +1,17 @@
+1. Visit start.spring.io
+2. After visiting the website, select the configuration:
+   a. Project: MAVEN project
+   b. Langauge: Java
+   c. Spring Boot : either a snapshot version is there or a released version. Always choose the released version
+   d. Project Metadata:
+      1. Group : com.rest.webservices
+      2. Artifact : restful-web-services
+      3. Name : restful-web-services
+3. Dependencies: Add 
+   a. Spring Web
+   b. Spring Boot DevTools
+   c. Spring Data JPA
+   d. H2
+4. Press 'Generate'. A zip file would be downloaded. Extract the zip file.
+5. Eclipse -> File -> Import -> Maven -> Existing Maven project -> browse and select the downloaded unzipped file.
+6. The project is now loaded and ready to run.

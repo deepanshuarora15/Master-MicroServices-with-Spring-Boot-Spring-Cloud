@@ -1,0 +1,42 @@
+1. In the previous example, we had to write 20 lines code just to make one microservice call another microservice.
+2. If microservices are multiple, then this will become hell. 
+3. Solution : Spring Cloud provided us with a framework called Feign
+4. pom.xml add
+
+<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+    <version>3.0.3</version>
+</dependency>
+
+4. In the currency conversion microservice, add the annotation @EnableFeignClients to the default class, that is there when you create 
+   the appliction.
+5. We would create a new class called as CurrencyExchangeProxy.java inside the conversion microservice:
+
+package com.microservices.currencyconversionservice;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
+@FeignClient(name="currency-exchange" , url="localhost:8000")
+public interface CurrencyExchangeProxy {
+	@GetMapping(path="/currency-exchange/from/{from}/to/{to}")
+	public CurrencyConversion retrieveChangeValue(@PathVariable String from, @PathVariable String to);
+}
+
+
+6. Now inside the CurrencyCnversionController where we had written a very difficult API procedure last time,
+   just add or replace it with a better shorthanded feign method:
+
+@GetMapping(path="/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}")
+	public CurrencyConversion calculateCurrencyConversionFeign(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
+		
+		CurrencyConversion currencyConversion = proxy.retrieveChangeValue(from, to);
+		return new CurrencyConversion(currencyConversion.getId(), from, to, quantity, 
+				currencyConversion.getConversionMultiple(), quantity.multiply(currencyConversion.getConversionMultiple()), currencyConversion.getEnvironment()+" feign");
+	}
+
+

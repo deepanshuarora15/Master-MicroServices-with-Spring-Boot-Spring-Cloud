@@ -1,0 +1,49 @@
+1. The problem with the approaches till now are:
+   a. Complex queries are difficult to handle
+   b. Relationships between the tables keeps on changing. Previously discussed solutions are not very flexible with this.
+      A lot of rework had to be done.
+2. JPA is the solution here. It allows mapping of application classes to database tables.
+3. Mapping is done with an interface kind of thing between the class and the database table. This is:
+   a. EntityManager
+   b. Criteria API
+   c. JPQL
+4. By using @Id annotation, we set the primary key. By using @Entity we define the class as table. By defining @Table,
+   we define how class Task is mapped to Table Task.
+
+@Entity
+@Table(name = "Task")
+public class Task{
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column(name = "description")
+	private String desc;
+	
+	@Column(name = "target_date")
+	private String targetDate;
+
+	@Column(name = "is_done")
+	private String isDone;
+}
+
+
+5. Defining many to many relationships
+
+public class Employee{
+	@ManyToMany
+	private List<Task> tasks;
+}
+
+
+public class Task{
+	@ManyToMany(mappedBy = "tasks")
+	private List<Employee> employees;
+}
+
+6. In case of inheritance, there are multiple classes, but the SQL table is one only. So JPA allows us to use annotations on the 
+   base class, such that 
+
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminationColumn(name="Employee_type")

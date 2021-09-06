@@ -1,0 +1,13 @@
+1. Deployment of microservices becomes complex especially when different microservices of your project have been developed using
+   different programming languages and framework.
+2. Problem: with the above situation, we would be having different deployment scheme for different services - which is confusing & 
+   cumbersome.
+3. We need one common way of deploying all microservices irrespective of the tech that they have been built-on.
+4. Solution : containers. Most popular one of them is docker.
+5. We can create docker images for each of the microservcies that we have.
+6. Docker contains everything that a microservice requires to run:
+   a. Application Runtime : JDK/Python?Node js etc
+   b. Application Code
+   c. Dependencies
+7. Once your above docker machine is configured & ready, then it can be run anywhere : your local machine, corporate data center, 
+   cloud, GCP, Azure or whatever

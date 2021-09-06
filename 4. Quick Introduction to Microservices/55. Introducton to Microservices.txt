@@ -1,0 +1,9 @@
+1. Web Services are complicated. Micro servcies are even more complicated then those.
+2. Problem: There is no one standard definition of microservices.
+3. Microservices is nothing but a combination of :
+   a. REST Web Services
+   b. Small well chosen deployment Units with very well thought through boundaries.
+   c. & cloud enabled
+4. All of these microservices can interact with each other. It's not compulsory for them to do so, though.
+5. Each of these microservices, then has multiple instances, which can be deployed in hassle free manner.
+   they can also be destructed/torn-down without any big challenge.

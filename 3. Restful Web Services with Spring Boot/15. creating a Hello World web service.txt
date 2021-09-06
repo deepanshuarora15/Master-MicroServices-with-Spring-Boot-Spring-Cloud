@@ -1,0 +1,47 @@
+1. In the following example, we are just returning a string in the web service. As we move ahead, we would see how 
+   JSON's are returned using Beans
+
+
+HelloWorldController
+
+package com.rest.webservices.restfulwebservices;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloWorldController {
+	//GET
+	// URI - /hello-world
+	//method - "Hello World"
+	@RequestMapping(method=RequestMethod.GET, path="/hello-world")
+	public String helloWorld() {
+		return "hello World";
+	}
+
+}
+
+
+
+or we can simplify and replace @RequestMapping with @GetMapping instead
+
+package com.rest.webservices.restfulwebservices;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloWorldController {
+	//GET
+	// URI - /hello-world
+	//method - "Hello World"
+	@GetMapping(path="/hello-world")
+	public String helloWorld() {
+		return "hello World";
+	}
+
+}
+
+

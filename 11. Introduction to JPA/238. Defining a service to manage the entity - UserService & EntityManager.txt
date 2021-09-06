@@ -1,0 +1,29 @@
+1. @Transactional annotation is added to the top of the UserDaoService, so as to decalre that all the methods of this class
+   are gonna be involved in some kind of DB transactions.
+2. @Repository is used to mark, the DaoService classes.
+3. User jack = new User("Jack", "Admin");
+   entitymanager.persist(jack);
+4. UserDaoService.java
+
+package com.rest.webservices.restfulwebservices.jpatutorial;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Transactional
+public class UserDaoService {
+	
+	@PersistenceContext
+	private EntityManager entitymanager;
+	public long insert(User user) {
+		entitymanager.persist(user);
+		return user.getId();
+	}
+}
+
+
+5. 

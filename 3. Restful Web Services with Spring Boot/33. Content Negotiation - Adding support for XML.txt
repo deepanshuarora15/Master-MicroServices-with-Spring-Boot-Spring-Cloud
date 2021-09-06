@@ -1,0 +1,14 @@
+1. By default, we get response in JSON formats.
+2. To have support for XML as well, we have the following dependency to be added to pom.xml:
+
+<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
+3. To verify, use POSTMAN and while sending in a 'GET' request. Add 'Headers' and select 'Key' - 'Accept'
+   and set value to 'application/xml'
+
+
+
+

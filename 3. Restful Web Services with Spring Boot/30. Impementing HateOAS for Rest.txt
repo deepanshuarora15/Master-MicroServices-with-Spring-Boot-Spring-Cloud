@@ -1,0 +1,23 @@
+1. Till now we have looked at data only. But on webpages, there is also an option to perform other actions as well.
+2. We can accomodate those actions in REST, by using HATEOAS.
+3. Earlier, we were able to respond to the GET request, only with data, but now we need to send other links as well.
+   So with Hateoas, whenevr a data for a particular user is searched, the link to all users, can also be returned as a link
+   embedded in the response.
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+
+@GetMapping("/users/{id}")
+	public EntityModel<User> retrieveUser(@PathVariable int id) {
+		User user = service.findOne(id);
+		if(user==null) {
+			throw new UserNotFoundException("User does not exist for this id " + id);
+		}
+		EntityModel<User> model = EntityModel.of(user);
+		WebMvcLinkBuilder linkToUsers = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+		model.add(linkToUsers.withRel("all-users"));
+		return model;
+	}
+
+
+  

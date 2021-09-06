@@ -1,0 +1,111 @@
+1. Our main service that's exposed to the user is Currency conversion service.
+2. It will talk to the service we are building currently : Currency Exchange Microservice.
+3. CurrencyExchangesService talks to the database. Also it can itself have several instances of itself, each running on a different port.
+4. In the CurrencyExchange.java , we are gonna be setting up a new String attribute known as environment. This will be the port
+   number of the isntance. We are not gonna use it in ths constructor, but will implement the getters & setters for it.
+   package com.microservices.currencyexchangeservice;
+
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+public class CurrencyExchange {
+
+	private Long id;
+	private String from;
+	private String to;
+	private BigDecimal conversionMultiple;
+	private String environment;  // new attribute set
+
+	public CurrencyExchange() {
+		super();
+	}
+
+	public CurrencyExchange(Long id, String from, String to, BigDecimal conversionMultiple) {
+		super();
+		this.id = id;
+		this.from = from;
+		this.to = to;
+		this.conversionMultiple = conversionMultiple;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
+	public BigDecimal getConversionMultiple() {
+		return conversionMultiple;
+	}
+
+	public void setConversionMultiple(BigDecimal conversionMultiple) {
+		this.conversionMultiple = conversionMultiple;
+	}
+
+	public String getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(String environment) {
+		this.environment = environment;
+	}
+
+	@Override
+	public String toString() {
+		return "CurrencyExchange [id=" + id + ", from=" + from + ", to=" + to + ", conversionMultiple="
+				+ conversionMultiple + "]";
+	}
+
+}
+
+5. In the CurrencyExchangeController, then we will use Spring environment which will help us to dynamically fetch whatever port
+   the microservice is running on.
+   import org.springframework.core.env.Environment;
+
+@RestController
+public class CurrencyExchangeController {
+		@Autowired
+		private Environment environment;
+		@GetMapping(path="/currency-exchange/from/{from}/to/{to}")
+		public CurrencyExchange retrieveChangeValue(@PathVariable String from, @PathVariable String to) {
+			CurrencyExchange currencyExchange = new CurrencyExchange(1000L, "USD", "INR", BigDecimal.valueOf(65));
+			String port = environment.getProperty("local.server.port");
+			currencyExchange.setEnvironment(port);
+			return currencyExchange;
+		}
+}
+
+
+6. To run the same service on some other port and thereby overriding the port that we decided in applicaton.properties.
+   Right click on code. Run-> Run configuration. Select CurrencyExchangeServiceApplication and duplicate it.
+   Go to the duplicate instance and Go to 'Arguments'. In the textbox titled 'VM Arguments':
+
+Dserver.port=8001
+
+7. Click on 'Run' button at bottom RHS of the same window. Now the port 8001 is also running.
+
+http://localhost:8001/currency-exchange/from/%7Bfrom%7D/to/%7Bto%7D
+
+8. The advatnage of the above method is that now your app is running on a different port and you did not have to change the 
+   port configuration in application.properties

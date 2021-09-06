@@ -1,0 +1,4 @@
+1. Before we had to decide the framework and all the required dependencies. Eg: Spring MVC, Spring Security
+2. Exception handling had to be done manually. Configurations also had to be defined largely manually.
+3. We don't need to do all this extra stuff now. With Spring Boot, we can focus on building code. Configurations are taken care
+   of, by Spring Boot

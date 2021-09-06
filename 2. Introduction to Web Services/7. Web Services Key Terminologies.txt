@@ -1,0 +1,6 @@
+1. Application A would be referred to Service Consumer or Client
+2. Web Service is called as Service Provider or server
+3. Service Defintion is nothing but the contract between the service provider and the service consumer.
+4. Transport: It defines how a service is called. 
+   a. Service can be exposed over the internet and can be consumed via HTTP protocol.
+   b. or service could be exposed over a queue and can be consumed via MQ. 

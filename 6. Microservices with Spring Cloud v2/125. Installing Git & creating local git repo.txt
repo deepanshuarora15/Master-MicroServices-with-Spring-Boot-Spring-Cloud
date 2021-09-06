@@ -1,0 +1,12 @@
+1. Create a new folder. make sure that the folder name does not have white spaces. Inside the folder do 'git init'
+2. Create a new file. Name it 'limits-service.properties'
+3. In the file created, add the following commands
+
+limits-service.minimum=5
+limits-service.maximum=995
+
+
+4. git add .
+5. git commit -m "Adding the limits-service.properties"
+
+6. Now the file has been commited in the local git repo

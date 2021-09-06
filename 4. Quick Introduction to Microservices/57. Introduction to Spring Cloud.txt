@@ -1,0 +1,14 @@
+1. cloud.spring.io
+2. Spring cloud provides tools for developers to quickly build some of the common patterns in distributed systems.
+3. Spring cloud is not a project but an umbrella which houses a lot of projects under it. Eg: Spring cloud netflix is one
+   of the projects under Spring Cloud
+4. Challenges discusses earlier and their corresponding solutions under Spring cloud:
+   a. Configuration management: Spring cloud config server allows configuration of all instances of all microservices to be stored
+      in the centralized git repository. As all configuration is stored in one place - it's easy to manage now.
+   b. Dynamic Scale up and Scale Down: Ribbon is the load balancer to balance load between multiple instances. Ribbon is client
+      side load balancing
+   c. Visibility & Monitoring: Zipkin Distributed Tracing. 
+      Also there are some common features among all microservcies like Security, Analytics etc. Instead of implementing these common
+      features repeatedly ourselves, we can rather use Netflix Zuel API Gateway.
+   d. Fault Tolerance: Hystrix. It helps us to define a default response in case a microservice goes down
+   

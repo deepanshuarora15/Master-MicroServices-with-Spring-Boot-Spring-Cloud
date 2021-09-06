@@ -1,0 +1,62 @@
+1. Having different URI or URI versioning was one of the ways, as discussed earlier.
+2. One other way is usign request params versioning:
+
+@GetMapping(value="/person/param", params="version=1")
+	public Personv1 personv1() {
+		return new Personv1("Bob Charlie");
+	}
+	
+	@GetMapping(value="/person/param", params="version=2")
+	public Personv2 personv2() {
+		return new Personv2(new Name("Bob","Charlie"));
+	}
+
+
+3. Another way is known as header versioning. 
+
+@GetMapping(value="/person/header", headers="X-API-VERSION=1")
+	public Personv1 personv1() {
+		return new Personv1("Bob Charlie");
+	}
+	
+	@GetMapping(value="/person/header", headers="X-API-VERSION=2")
+	public Personv2 personv2() {
+		return new Personv2(new Name("Bob","Charlie"));
+	}
+
+
+In Postman, send the key value as X-API-VERSION 1 
+
+4. Another way is Media type versioning or accept header versioning or content negotiation versioning
+
+@GetMapping(value="/person/produces", produces="application/vnd.company.app-v1+json")
+	public Personv1 personv1() {
+		return new Personv1("Bob Charlie");
+	}
+	
+	@GetMapping(value="/person/produces", produces="application/vnd.company.app-v2+json")
+	public Personv2 personv2() {
+		return new Personv2(new Name("Bob","Charlie"));
+	}
+
+While hitting the URI now via Postman, we would use GET API headers as:
+
+Key		Value
+Accept		application/vnd.company.app-v1+json
+
+5. Which type of versioning should be used?
+
+a. Media type versioning : Github
+b. Header versioning: Microsoft
+c. URI versioning: Twitter
+d. Request Params versioning: Amazon
+
+6. The factors that need to be considered for URI versioning are:
+   a. URI pollution : URI versioning & Request Parameter versioning both pollute the URI space
+   b. Misuse of HTTP headers : Header versioning and Media type version do this
+   c. Caching : URI versioning & Request Parameter both enable caching powers.
+   d. Can we execute the request on the browser. That is except Postman 
+      Yes it is easier to do in case of URI versioning or param based versioning. But difficult to do in case of other two.
+7. API documentation for versioning?
+   - It is easier to do in case of URI versioning or param based versioning
+   

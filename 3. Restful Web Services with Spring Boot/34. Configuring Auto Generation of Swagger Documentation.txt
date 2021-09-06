@@ -1,0 +1,9 @@
+1. We need to provide some documentation to the user, something like Service Definition or API contract.
+2. One way is to manually generate the documentation. Other way out is to use automation : open API specification.
+   Documentation of the API is automatically generated from the API that you construct via Spring Boot.
+3. We would be using the framework: OpenAPI3 
+4. Get the dependency configuration from springdoc website.
+5. localhost:8080/swagger-ui.html
+6. This html page is called Swagger UI. It contains the HTTP protocols along with 'resources'. 
+7. At the bottom, the classes/beans are also present.
+8. API docs link is there in the Swagger UI html page itself.

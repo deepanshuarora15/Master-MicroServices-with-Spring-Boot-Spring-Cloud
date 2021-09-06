@@ -1,0 +1,19 @@
+@GetMapping(path="/jpa/users")
+	public List<User> retrieveAllUsers(){
+//		System.out.println(service.findAll());
+//		return service.findAll();
+		return userRepository.findAll();
+	}
+	
+	@GetMapping("/jpa/users/{id}")
+	public EntityModel<Optional<User>> retrieveUser(@PathVariable int id) {
+		//User user = service.findOne(id);
+		Optional<User> user = userRepository.findById(id);
+		if(!user.isPresent()) {
+			throw new UserNotFoundException("User does not exist for this id " + id);
+		}
+		EntityModel<Optional<User>> model = EntityModel.of(user);
+		WebMvcLinkBuilder linkToUsers = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+		model.add(linkToUsers.withRel("all-users"));
+		return model;
+	}

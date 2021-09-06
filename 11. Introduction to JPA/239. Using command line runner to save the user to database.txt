@@ -1,0 +1,107 @@
+1. CommandLineRunners run when the appication starts up.
+2. User.java
+
+package com.rest.webservices.restfulwebservices.jpatutorial;
+
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "User")
+public class User {
+	
+	@Id
+	@GeneratedValue
+	private long id;
+	private String name;
+	private String role;
+	
+	protected User() {
+		super();
+	}
+	
+	public User(String name, String role) {
+		super();
+		this.name = name;
+		this.role = role;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", role=" + role + "]";
+	}
+	
+}
+
+
+
+3. UserDaoService.java
+
+package com.rest.webservices.restfulwebservices.jpatutorial;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Transactional
+public class UserDaoService {
+	
+	@PersistenceContext
+	private EntityManager entitymanager;
+	public long insert(User user) {
+		entitymanager.persist(user);
+		return user.getId();
+	}
+}
+
+
+4. UserDaoServiceCommandLineRunner.java
+
+package com.rest.webservices.restfulwebservices.jpatutorial;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserDaoServiceCommandLineRunner implements CommandLineRunner{
+	
+	private static final Logger log = LoggerFactory.getLogger(UserDaoServiceCommandLineRunner.class);
+	
+	@Autowired
+	private UserDaoService userDaoService;
+	@Override
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		User user = new User("Jack", "Admin");
+		long insert = userDaoService.insert(user);
+		log.info("New user is created " + user);
+		
+	}
+}
+

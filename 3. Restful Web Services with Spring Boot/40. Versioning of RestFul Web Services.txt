@@ -1,0 +1,127 @@
+1. Eg: consider a class Personv1 that had attribute as private String name.
+2. Later we, made a name class with attributes String firstName; String lastName.
+3. Now we make another class Personv2 and add attributes
+   private Name name1;
+4. But the people who are already registered, have no idea about Personv2. Hence we need to have versioning of our APIs.
+5. One simple way is to different URI for these versions of APIs
+
+6. Personv1.java
+
+package com.rest.webservices.restfulwebservices.versioning;
+
+public class Personv1 {
+		private String name;
+		
+		public Personv1(String name) {
+			super();
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return "Personv1 [name=" + name + "]";
+		}
+		
+}
+
+
+7. Name.java
+
+package com.rest.webservices.restfulwebservices.versioning;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Name {
+	private String firstName;
+	private String lastName;
+	
+	
+	public Name() {
+		super();
+	}
+
+	public Name(String firstName, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+}
+
+8. Personv2.java
+
+package com.rest.webservices.restfulwebservices.versioning;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Personv2 {
+	
+	@Autowired
+	private Name name;
+	
+	public Personv2(Name name) {
+		super();
+		this.name = name;
+	}
+
+	public Name getName() {
+		return name;
+	}
+
+	public void setName(Name name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Personv2 [name=" + name + "]";
+	}
+	
+}
+
+
+9. PersonVersionController.java
+
+package com.rest.webservices.restfulwebservices.versioning;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PersonVersioningController {
+	
+	@GetMapping(path="v1/person")
+	public Personv1 personv1() {
+		return new Personv1("Bob Charlie");
+	}
+	
+	@GetMapping(path="v2/person")
+	public Personv2 personv2() {
+		return new Personv2(new Name("Bob","Charlie"));
+	}
+}

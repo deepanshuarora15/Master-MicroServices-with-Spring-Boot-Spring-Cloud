@@ -1,0 +1,20 @@
+1. The main goal of Spring Boot is to develop production ready applications - quickly.
+2. Another goal is to provide common non-functional features:
+   a. Embedded servers
+   b. Metrics
+   c. Health checks
+   d. Externalized Configuration
+3. What Spring Boot is not?
+   a. It is not a code generation platform. It generates no code at all.
+   b. It is neither an application server, nor a web server.
+4. Features of Spring Boot are:
+   a. Quick starter projects with auto configuration.
+      - With this Spring Web , Spring Core, Spring MVC, a validation framework and a logging framework all come in-built
+   b. JPA
+   c. Embedded Servers: Earlier we used to install a Linux box, then install java on it and then finally install a web server on it
+      such as Tomcat. Then you would take your web application WAR and deploy it on the server.	
+      But with Spring boot, we just need a Linux box with Java installed and we can run our app directly on it, as the web server
+      like Tomcat already comes bundled inside the Spring Boot application.
+   d. Production-ready features:
+      1. Metrics & health checks: Spring Boot actuator
+      2. Externalized configuration: 

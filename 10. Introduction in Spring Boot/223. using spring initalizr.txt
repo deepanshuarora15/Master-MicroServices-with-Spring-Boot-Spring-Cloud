@@ -1,0 +1,5 @@
+1. From Spring initializr, generate a Spring web dependency project.
+2. From Eclipse, then Import Existing Maven project.
+3. src/main/java : here our java code resides
+4. src/main/resources: application.properties file resides here.
+5. src/test/java : test cases

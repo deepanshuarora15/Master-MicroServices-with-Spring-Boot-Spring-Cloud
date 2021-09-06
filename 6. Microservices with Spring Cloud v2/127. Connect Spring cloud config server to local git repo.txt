@@ -1,0 +1,30 @@
+1. Check the pwd of your git repo and in application.properties of spring-cloud-config-server
+   spring.cloud.config.server.git.uri= file:///C:/Users/MANAN/Downloads/git-localconfig-repo
+2. Note that file:/// is prefixed
+3. Also path should only contain forward slashes.
+4. After this add annotation @EnableConfigServer to the top of the class that is present by default when you start the project.
+
+
+In this case, that class is SprinCloudConfigServerApplication.java
+
+package com.microservices.springcloudconfigserver;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
+
+@EnableConfigServer
+@SpringBootApplication
+public class SpringCloudConfigServerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringCloudConfigServerApplication.class, args);
+	}
+
+}
+
+
+5. Run on localhost:8080/limits-service/default
+
+6. If something goes wrong, make sure that the file inside your github repo is spelled as 'limits-service'.
+    Typos anywhere will lead to issues.

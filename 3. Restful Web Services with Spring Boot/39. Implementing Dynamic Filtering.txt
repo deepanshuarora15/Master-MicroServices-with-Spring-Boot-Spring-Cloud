@@ -1,0 +1,89 @@
+1. Static filtering is kind of useless in the sense that all the filters have to be defined at compile time, while
+   it is highly possible that you would have to decide these filters on the fly. That's where the concept of dynamic filtering
+   kicks in.
+2. SomeBean.java
+
+package com.rest.webservices.restfulwebservices.filtering;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+//@JsonIgnoreProperties(value = {"field2", "field3"})
+@JsonFilter("SomeBeanFilter")
+public class SomeBean {
+	private String field1;
+	private String field2;
+	private String field3;
+	
+	
+	public SomeBean(String field1, String field2, String field3) {
+		super();
+		this.field1 = field1;
+		this.field2 = field2;
+		this.field3 = field3;
+	}
+	public String getField1() {
+		return field1;
+	}
+	public void setField1(String field1) {
+		this.field1 = field1;
+	}
+	public String getField2() {
+		return field2;
+	}
+	public void setField2(String field2) {
+		this.field2 = field2;
+	}
+	public String getField3() {
+		return field3;
+	}
+	public void setField3(String field3) {
+		this.field3 = field3;
+	}
+	@Override
+	public String toString() {
+		return "SomeBean [field1=" + field1 + ", field2=" + field2 + ", field3=" + field3 + "]";
+	}
+	
+}
+
+
+3. FilteringController.java
+
+package com.rest.webservices.restfulwebservices.filtering;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+
+@RestController
+public class FilteringContoller {
+	@GetMapping("/filtering")
+	public MappingJacksonValue retrieveSomeBean() {
+		SomeBean someBean = new SomeBean("value1", "value2", "value3");
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("field1", "field2");
+		FilterProvider filters = new SimpleFilterProvider().addFilter("SomeBeanFilter", filter);
+		MappingJacksonValue mapping = new MappingJacksonValue(someBean);
+		mapping.setFilters(filters);
+		return mapping;
+	}
+	
+	@GetMapping("/filtering-list")
+	public MappingJacksonValue retrieveListOfSomeBean() {
+		List<SomeBean> list = Arrays.asList(new SomeBean("A","B","C"), new SomeBean("D","E","F"));
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("field1", "field2");
+		FilterProvider filters = new SimpleFilterProvider().addFilter("SomeBeanFilter", filter);
+		MappingJacksonValue mapping = new MappingJacksonValue(list);
+		mapping.setFilters(filters);
+		return mapping;
+	}
+}

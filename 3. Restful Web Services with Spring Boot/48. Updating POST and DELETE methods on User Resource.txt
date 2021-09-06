@@ -1,0 +1,18 @@
+@DeleteMapping("/jpa/users/{id}")
+	public void deleteUser(@PathVariable int id) {		
+		userRepository.deleteById(id);
+	}
+
+Exeption is thrown automatically, so no worries about that too.
+
+2. 
+
+
+@PostMapping("/jpa/users")
+	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
+		User savedUser = userRepository.save(user);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
+		return ResponseEntity.created(location).build();
+	}
+
+

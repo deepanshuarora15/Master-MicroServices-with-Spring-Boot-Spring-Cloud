@@ -1,0 +1,20 @@
+1. Problem: Inside the CurrencyExchangeProxy.java, we have written code
+   @FeignClient(name="currency-exchange" , url="localhost:8000")
+2. Problem is that we have fixes the URL. But there might be multiple isntances of the exchange service running on port 8000,
+   8001, 8002 etc. We would need to shoot the request to an instance that is active(not down). Simply said, we need to decide the port
+   on the go dynamically. Also load balancing needs to be kept in mind.
+3. Solution: use a Naming Server. All the services you have would now have to be mandatorily registered with this Naming server.
+   So one service cannot invoke other service directly. It would have to call the Naming Server. Namig server would then return an 
+   instance of the active instances back. Load Balancing is auto taken care of.
+4. Spring Boot provides Eureka as the naming server.
+5. Create a new project from spring initialzr with dependencies:
+   a. Spring Boot Dev Tools
+   b. Eureka Server
+   c. Spring Boot Actuator
+6. Eureka is a naming server by Netflix.
+7. After launching the prject, go the default class and add the annotation: @EnableEurekaServer
+8. Inside the application server, we need to add:
+   spring.application.name = naming-server
+   server.port=8761
+   eureka.client.register-with-eureka=false // we do not want the server to register with itself
+   eureka.client.fetch-registry=false

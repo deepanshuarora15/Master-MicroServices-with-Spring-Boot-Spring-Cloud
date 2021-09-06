@@ -1,0 +1,4 @@
+1. In earlier versions of Spring & Spring Cloud, we were using Ribbon.
+2. But the latest versions uses Spring Loadbalancer, instead of Ribbon for load balancing.
+3. Spring Cloud Gateway would be used instead of Zuul.
+4. Resilience4j would be used instead of Hystrix.

@@ -1,0 +1,7 @@
+1. Set up a new spring initialzr project and set it up the way we do.
+   Name it 'currency-conversion-service'
+2. Application.properties
+
+spring.application.name=currency-conversion
+server.port=8100
+spring.config.import= optional:configserver:http://localhost:8888

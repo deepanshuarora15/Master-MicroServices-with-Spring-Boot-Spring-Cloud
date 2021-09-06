@@ -1,0 +1,12 @@
+1.
+<dependency>
+	<groupId>org.springframework.data</groupId>
+	<artifactId>spring-data-rest-hal-explorer</artifactId>
+</dependency>
+
+2. HAL is used for API visualization.
+3. localhost:8080/
+4. HAL explorer window would open up. 
+5. In the search bar search /actuator and press 'Go'
+6. Similarly you can open any link like /users and /users/1 also in here.
+7. This is used to expose APIs to less technical friendly people.

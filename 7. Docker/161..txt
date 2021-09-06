@@ -1,0 +1,3 @@
+1. Docker make lif easier for both : the development team & the operations team.
+2. Download Docker desktop App from https://www.docker.com/get-started
+3. Once installed, you can verify it using cmd. Run the command docker --version

@@ -1,0 +1,70 @@
+1. There might be certain attributes inside your Bean, that you would not like to be returned along with the JSON. One such
+   example is password.
+2. So we do something known as 'filtering'. We filter out the stuff that we no longer wanna use.
+3. @JsonIgnore is the annotation that needs to be put on the top of the field in the Bean, that you want to get ignored.
+4. But if there are multiple fields that you want to filter out, then better than writing annotation
+   @JsonIgnore at the top of all those fields, a better way out is to write the annotation on the top of the 
+   class
+
+5. FilteringController.java
+
+package com.rest.webservices.restfulwebservices.filtering;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class FilteringContoller {
+	@GetMapping("/filtering")
+	public SomeBean retrieveSomeBean() {
+		return new SomeBean("value1", "value2", "value3");
+	}
+}
+
+
+6. SomeBean.java
+
+package com.rest.webservices.restfulwebservices.filtering;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+@JsonIgnoreProperties(value = {"field2", "field3"})
+public class SomeBean {
+	private String field1;
+	private String field2;
+	private String field3;
+	
+	
+	public SomeBean(String field1, String field2, String field3) {
+		super();
+		this.field1 = field1;
+		this.field2 = field2;
+		this.field3 = field3;
+	}
+	public String getField1() {
+		return field1;
+	}
+	public void setField1(String field1) {
+		this.field1 = field1;
+	}
+	public String getField2() {
+		return field2;
+	}
+	public void setField2(String field2) {
+		this.field2 = field2;
+	}
+	public String getField3() {
+		return field3;
+	}
+	public void setField3(String field3) {
+		this.field3 = field3;
+	}
+	@Override
+	public String toString() {
+		return "SomeBean [field1=" + field1 + ", field2=" + field2 + ", field3=" + field3 + "]";
+	}
+	
+	
+}

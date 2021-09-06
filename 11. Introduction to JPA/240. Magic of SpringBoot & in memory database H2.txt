@@ -1,0 +1,27 @@
+1. Where is the database created?
+   - In memory, using H2
+2. In application.properties
+
+spring.h2.console.enabled=true
+spring.jpa.show-sql=true
+
+3. If /h2-console is not opening, and forbidden error status is coming in, that's because of Spring security.
+4. What schema is used to create the tables?
+   Ans: It is created based on Entity definitions.
+5. Where are the tables created?
+   -In memory, H2
+6. Can i see the data in the database?
+   Yes http://localhost:8080/h2-console/
+   JDBC URL : jdbc:h2:mem:testdb
+7. Where is Hibernate coming in from?
+   - because in Spring initializr, we added the dependency 'Spring Data JPA Transfer'
+8. How is the datasource created?
+   - Spring Boot Auto Configuration
+9. Advantages of Spring Boot & In memory database
+   a. Zero project setup or infrastructure
+   b. Zero Configuration
+   c. Zero Maintenance
+   d. Easy to use for learning & Unit tests
+   e. Simple Configuration to switch to a real database
+10. Restrictions on in-memory databases: Data is not persisted between restarts
+   

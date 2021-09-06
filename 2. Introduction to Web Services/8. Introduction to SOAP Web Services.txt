@@ -1,0 +1,10 @@
+1. Web services have been broadly classified under two different groups:
+   a. SOAP
+   b. REST
+2. SOAP and REST are not head to head comparable. REST is more of an architectural design.
+3. On the other hand SOAP poses restrictions on the XML which is exchaged between the Service Provider & the Service Consumer.
+4. SOAP is Simple Object Access Protocol. SOAP defines a specific way of building web services. XML is the request response format
+   or the data exchange format. JSON is not allowed in SOAP
+5. Transport can be either HTTP or MQ.
+6. Service Defintion is in terms of WSDL i.e. Web Service Defintion Language.
+7. Left...

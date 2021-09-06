@@ -1,0 +1,54 @@
+1. GET request http:localhost:8080/users/500
+   should ideally return an error, because user with ID 500 does not exist.
+2. But it does not. As of now status 200 OK is returned and response body is empty.
+3. So first let's do some Exception Handling. 
+
+@GetMapping("/users/{id}")
+	public User retrieveUser(@PathVariable int id) {
+		User user = service.findOne(id);
+		if(user==null) {
+			throw new UserNotFoundException("User does not exist for this id " + id);
+		}
+		return user;
+	}
+
+
+UserNotFoundException.java:
+
+
+package com.rest.webservices.restfulwebservices.user;
+
+public class UserNotFoundException extends RuntimeException {
+
+	public UserNotFoundException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+}
+
+4. The way we define the constructor in UserNotFoundException is. Source-> generate constructor from superclass.
+   Then select RuntimeException(String)
+5. But still, the issue is not resolved. With the above code, we do get an error msg in the response. But error code
+   is 500, which means Internal Server Error. This is not Internal Server Error. We need to change it and show the correct
+   error.
+6. We just need to change the annotations in Exception handling
+
+package com.rest.webservices.restfulwebservices.user;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class UserNotFoundException extends RuntimeException {
+
+	public UserNotFoundException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+
+}
+
+
+Now the status code returned is 404 Not found

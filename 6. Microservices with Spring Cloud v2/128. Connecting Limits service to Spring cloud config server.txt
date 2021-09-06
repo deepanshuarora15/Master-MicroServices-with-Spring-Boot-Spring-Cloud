@@ -1,0 +1,24 @@
+1. Step 1 was to connect our Spring cloud config server to the github repo.
+2. In step2 we are gonna be connecting Limits microservices to Spring cloud config server.
+3. The diagram for the same is given as page 16 of the pdf.
+4. We have already added some configurations in our limits-service that would hep us communicate with our cloud config.
+
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+
+5. spring.config.import=optional:configserver:http://localhost:8888
+
+We have added this line in the limits microservice application.properties, so it can connect to spring cloud config server.
+If we remvoe the optional keyword, then it will always madanatroily connect to the server.
+
+6. Imp: The most imp step is to add the following command inside the application.properties file
+   spring.application.name=limits-service
+
+7. Make sure to start the config server first and then limits server, to see the changes.
+
+http://localhost:8888/limits-service/default
+http://localhost:8080/limits
+

@@ -1,0 +1,16 @@
+1. How does data exchange between the applications take place?
+   Ans: The application which wants to consume the web service, sends something known as 'Request' to the web service.
+        Web service then sends something known as a 'Response' to the application.
+2. How are web services interoperable?
+   Ans: This is because the Request and Response are both interoperable. They are in formats which can be generated in any
+        technology & any OS.
+   There are 2 standards followed for Request & Response
+   a. XML
+   b. JSON
+3. How does the appication know what 'request' to send, where to send it and what response format can it expect from the web service?
+   Ans: Service Definition
+4. Every web service has a Service Definition associated with it.Service Defintion consists of:
+   a. Request/Response Format : whether XML or JSON
+   b. Request Structure: How can an application send a request? Whatis the format of the request?
+   c. Response Structure: Format of the response
+   d. EndPoint: Where to send the request?

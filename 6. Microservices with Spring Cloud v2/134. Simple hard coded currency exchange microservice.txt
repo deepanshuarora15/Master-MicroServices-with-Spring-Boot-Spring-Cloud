@@ -1,0 +1,79 @@
+1. CurrencyExchangeController.java
+
+package com.microservices.currencyexchangeservice;
+
+import java.math.BigDecimal;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CurrencyExchangeController {
+	
+		@GetMapping(path="/currency-exchange/from/{from}/to/{to}")
+		public CurrencyExchange retrieveChangeValue(@PathVariable String from, @PathVariable String to) {
+			return new CurrencyExchange(1000L, "USD", "INR", BigDecimal.valueOf(65));
+		}
+}
+
+
+
+
+2. CurrencyExchange.java
+
+package com.microservices.currencyexchangeservice;
+
+import java.math.BigDecimal;
+
+public class CurrencyExchange {
+	private Long id;
+	private String from;  // will cause error later as it is a  SQL keyword, but we will fix it 
+	private String to;
+	private BigDecimal conversionMultiple;
+	
+	public CurrencyExchange() {
+		super();
+	}
+	public CurrencyExchange(Long id, String from, String to, BigDecimal conversionMultiple) {
+		super();
+		this.id = id;
+		this.from = from;
+		this.to = to;
+		this.conversionMultiple = conversionMultiple;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
+	}
+	public String getTo() {
+		return to;
+	}
+	public void setTo(String to) {
+		this.to = to;
+	}
+	public BigDecimal getConversionMultiple() {
+		return conversionMultiple;
+	}
+	public void setConversionMultiple(BigDecimal conversionMultiple) {
+		this.conversionMultiple = conversionMultiple;
+	}
+	@Override
+	public String toString() {
+		return "CurrencyExchange [id=" + id + ", from=" + from + ", to=" + to + ", conversionMultiple="
+				+ conversionMultiple + "]";
+	} 
+	
+	
+}
+
+
+3. As of now everything is static.

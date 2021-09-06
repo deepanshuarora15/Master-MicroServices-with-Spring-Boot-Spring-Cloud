@@ -1,0 +1,25 @@
+1. REST stands for representational state transfer. 
+2. When we browse a URL, we send in a HTTP GET request. Browser responds with a HTTP response in HTML format.
+3. When we submit a form, we send in a HTTP POST request. 
+4. Restful web services make use of HTTP status code also like 200-OK.
+5. RESTFUL web services exploits the features already available in HTTP.
+6. REST has something known as a resource. A resource has a URI or Uniform Resource Identifier.
+   a. /user/Ranga/todos/1
+   b. /user/Ranga/todos
+   c. /user/Ranga
+7. Unlike SOAP, your resource can have different representations:
+   a. XML
+   b. JSON
+   c. HTML
+8. 2 main things to remember when dealing with REST:
+   a. Always think in terms of resources, when dealing with REST. Eg: users could be a resource.
+   b. Make use of actions defined in HTTP. These actions would be performed on the resources. Eg: GET, POST, PUT, DELETE
+9. Examples:
+   a. Create a user : POST/users
+   b. Delete a user : DELETE/users/1
+   c. Get all users: GET/users
+   d. Get One user: GET/users/1
+10. Transport in REST is restricted to HTTP. MQ is not allowed.
+11. There is no standard Service Defintion such as WSDL. There are some popularly used though:
+    a. WADL: Web Application Defintion Langauge: not used anymore
+    b. Swagger: Popularly used for defining the Service Definition

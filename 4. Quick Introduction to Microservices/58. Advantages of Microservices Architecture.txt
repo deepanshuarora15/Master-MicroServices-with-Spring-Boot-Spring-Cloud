@@ -1,0 +1,6 @@
+1. Some advantages of microservices are:
+   a. New technology and process can be adapted fairly easily.
+   b. Each of the microservcies can be built using different technologies. Such flexibility is missing in Monolithic appplications.
+   c. Dynamic Scaling: As microservices are cloud based, you can increase the instances or decrease them automatically based on
+      load balancers.
+   d. Faster release cycles 

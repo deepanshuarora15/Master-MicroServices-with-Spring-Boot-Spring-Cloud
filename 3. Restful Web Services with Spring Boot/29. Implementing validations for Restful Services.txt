@@ -1,0 +1,39 @@
+1. When doing a POST request, we need to make sure that we add @Valid annotation as an argument to the function body
+2. Also some annotations need to be added to the Model class. This is where we are gonna be defining the regex kind of things.
+3. UserResource.java
+
+@DeleteMapping("/users/{id}")
+	public void deleteUser(@PathVariable int id) {
+		User user = service.deleteById(id);
+		if(user==null) {
+			throw new UserNotFoundException("id: " + id);
+			
+		}
+	}
+
+4. User.java
+
+public class User {
+	private Integer id;
+	@Size(min = 2,  message = "Name should have atleast 2 characters")
+	private String name;
+	@Past
+	private Date birthdate;
+	public Integer getId() {
+		return id;
+	}
+
+5. But as of now, if the front end sends in an invalid data, they just see '400 Bad Request'
+6. Some of the constraints have been mentioned above. For more constraints: just open the maven dependency of validations api.jar
+   and open the cosntraints folder.
+
+7. Exception
+
+@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(
+		MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+	ExceptionResponse exceptionResponse= new ExceptionResponse(new Date(), "Validation failed", ex.getBindingResult().toString());
+	return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+		}
+
+

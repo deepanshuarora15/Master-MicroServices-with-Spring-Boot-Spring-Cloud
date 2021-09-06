@@ -1,0 +1,11 @@
+1. Problems with microservices:
+   a. Bounded context: how to decide what your microservice should do or what it should not do
+      Solution: there is no one right answer. Keep defining them and later re-defining them. Continous improvement is the key
+   b. Configuration Management: There are multiple microservices. Each of them have multiple instances. And there are multiple
+      environments in which these instances are hosted. So it's a lot of work for the operations team to manage the configuration.
+   c. Dynamic Scale Up and Scale Down: Instantiating and deleting microservice instances and load balancing between those instances
+      is also a major hurde
+   d. Visibility: If the microservice is now running with 10 instances and there's a bug. How do you identify where the bug is?
+   e. Pack of Cards: If they are not well designed, then the entire app might go down. This is becasue there are certain 'key'
+      microservices that are involved in this case. If they go down, everything goes down. So it's important to have fault tolerance
+      in the microservices.	

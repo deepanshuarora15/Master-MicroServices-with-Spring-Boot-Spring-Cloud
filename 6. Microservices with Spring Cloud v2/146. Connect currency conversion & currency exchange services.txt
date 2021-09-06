@@ -1,0 +1,18 @@
+1. In this step we need to register our existing services with the Naming server.
+2. Add this dependency to your services:
+
+
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+
+3. Imp: after this , first start the naming-server and then start other microservices.
+4. On visiting http://localhost:8761/
+   we would see that our services are registered. hence the only thing required to register our services with Eureka is
+   to add dependencies in microservices pom.xml
+5. However, the following step should also be added to the application.properties of all microservices as well:
+   eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+6. Everytime we shutdown the app and restart it, the microservice first gets de-registered from the Naming Server.
+   And then it gets re-regsitered.

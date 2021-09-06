@@ -1,0 +1,33 @@
+1. <dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-actuator</artifactId>
+   </dependency>
+
+2. http://localhost:8080/actuator is the link.
+3. When you open the link, you would find 3 anchor tags. 
+
+// 20210829233743
+// http://localhost:8080/actuator
+
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/actuator",
+      "templated": false
+    },
+    "health": {
+      "href": "http://localhost:8080/actuator/health",
+      "templated": false
+    },
+    "health-path": {
+      "href": "http://localhost:8080/actuator/health/{*path}",
+      "templated": true
+    }
+  }
+}
+
+4. If you want all the links to be exposed rather, add the following code to application.properties
+management.endpoints.web.exposure.include=*
+
+5. Now all the links are exposed. 'Health' & 'Metrics' are of particular use, when the app goes into production. 
+   Actuator is very useful for app monitoring.

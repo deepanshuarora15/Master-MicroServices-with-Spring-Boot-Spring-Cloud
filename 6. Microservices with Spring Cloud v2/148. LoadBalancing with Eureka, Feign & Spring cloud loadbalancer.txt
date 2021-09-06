@@ -1,0 +1,18 @@
+1. CurrencyExchangeProxy.java
+
+//@FeignClient(name="currency-exchange" , url="localhost:8000") replace this line with:
+@FeignClient(name="currency-exchange")
+
+2. Now for the currrency-exchange service, start it on other port.
+   Run -> Run Configurations -> Environment -> Add Variable Server.port=8081
+   https://stackoverflow.com/questions/48639206/how-to-start-single-spring-boot-microservice-on-multiple-ports-in-sts-eclipse
+
+3. 
+
+Ok, now when we run the application
+http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+
+then we see the port is switching regularly between 8000 and 8001 , which reflects that load balancing is taking place.
+This is client side load balancing and is done by Feign.
+ConversionService has a load balancer that is in touch with Eureka naming server.
+

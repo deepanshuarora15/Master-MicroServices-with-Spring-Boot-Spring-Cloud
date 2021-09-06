@@ -1,0 +1,30 @@
+1. Not all services that are delivered over the web are web services.
+2. Eg: if you have developed an application to maintain TODO list, and you want some other application to reuse your app.
+   So is your TODO app a web service?
+   -No, because your app's output is HTML. And HTML is not really a format which is designed for application to application interaction.
+3. Your current TODO web application consists of 3 layers:
+   a. Web Layer (Top)
+   b. Business Layer (Middle)
+   c. Data Layer (Bottom)
+4. Output of web layer is HTML, so that can't be consumed by other applications directly.
+5. Can the rest of your app be used?
+   Ans : yes. Business layer and data layer can be clubbed together and pakced inside a JAR file and be exposed to be used in
+   your new application.
+6. Problems with above approach:
+   a. Data layer is connected to a database. So database would also have to be installed in your new app.
+   b. Business logic would have a thousand dependencies associated with them. So now you need to re-install them all in your new 
+      application.
+   c. Packing them all inside a JAR file and then shipping, is in itself a challenging task.
+   d. Any changes to the business logic would not be reflected in the new app directly. Any changes made to the business logic
+      would force you to create a new version of the JAR file and expose it to the new app. This process would have to be repeated,
+      everytime that you make changes in the business logic.
+7. So a web service is not the ones that we saw above. Instead it's a service that can be directly utiized by other apps directly.
+8. W3C definition of a web service: Software system designed to support interoperable machine to machine interactions over a network.
+9. So 3 keys to be highlighted here are:
+   a. Web Services are designed for machine to machine i.e. application to application interaction. That's why our TODO app 
+      is not a web service. It is not application to application interaction, rather application to human interaction.
+   b. Should be inter-operable. Which means all applications - irrespective of whether they are built in Python or Java or PHP, and 
+      hosted on Windows, Linux or Mac, should be able to consume your web service directly. 
+   c. Should allow communicaiton over the network : This is the problem with the JAR shipment above. JAR shipments are local and
+      communications happen within the boundary of the system. 
+      

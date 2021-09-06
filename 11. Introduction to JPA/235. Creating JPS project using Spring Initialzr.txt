@@ -1,0 +1,4 @@
+1. 2 main dependencies are:
+   Hibernate Core & Hibernate JPA
+2. JPA is an interface. it's a specification. Hibernate implements JPA. That's the difference.
+3. Hibernate is an ORM framework

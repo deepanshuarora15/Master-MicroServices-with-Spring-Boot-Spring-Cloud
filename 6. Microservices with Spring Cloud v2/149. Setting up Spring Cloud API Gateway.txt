@@ -1,0 +1,7 @@
+1. Spring Cloud/API Gateway is the new replacement for Zuul.
+2. Setup a new project api-gateway. Dependencies:
+   a. Spring Boot Dev Tools
+   b. Spring Boot Actuator
+   c. Eureka Discovery Client
+   d. Gateway
+3. 

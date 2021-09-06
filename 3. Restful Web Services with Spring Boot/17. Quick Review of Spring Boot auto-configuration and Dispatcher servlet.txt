@@ -1,0 +1,27 @@
+1. application.properties file, we can add the following command to open the application in debug mode
+
+logging.level.org.springframework = debug;
+
+2. When you save it, a lot of logs come in console. In there it is written, auto-configuration report. Under that report,
+   a. DispatcherServletConfiguration
+   b. ErrorMvcAutoConfiguration : This is what generates the whitelabel error text in browser, whenever an error crops up.
+   c. HttpMessageConvertersAutoConfiguration: Responsible for converting Bean to JSON	
+   d. JacksonAutoConfiguration: JSON to Bean and Bean to JSON conversion
+
+3. All these are searched by Spring Boot. SB finds out that ok, all these jar files or dependencies are set on the 'home' path
+   variable and hence SB auto configuration picks them up automatically for doing the configuration.
+4. Q: Who is configuring the Dispatcher Servlet?
+   A: SB auto-configuration
+5. Q: How does bean get converted to JSON?
+   A: HttpMessageConvertersAutoConfiguration & JacksonAutoConfiguration
+6. Q: Who is configuring the error mapping?
+   A: SB itself via ErrorMvcAutoConfiguration 
+7. Dispatcher Servlet follows a design pattern knows as 'Front Controller'. So Dispatcher Servlet is nothing but a front controller.
+   Whenever there is call like localhost:8080/Hello, the requests first goes & hits the Dispatcher Servlet.
+   Dispatcher servlet handles the root i.e. '/'
+8. Dispatcher Servlet maps the request to the right Controller. 
+9. So request -> Dispatcher Servlet -> Controller.
+10. The above is the mechanism for Request. What's the machanism for Repsonse?
+11. @RestController is written on the top of the controller class. One of the annotations inside the @RestController is @ResponseBody.
+    After this the converters like HttpMessageConvertersAutoConfiguration & JacksonAutoConfiguration come into picture & eventually
+    the response is returned.

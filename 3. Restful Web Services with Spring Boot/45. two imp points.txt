@@ -1,0 +1,6 @@
+UPDATE 1: SWAGGER
+With the recent update (2.5.0) to use springdoc-openapi-ui,
+
+You do not need ApiModel and ApiModelProperty annotations (needed with older Swagger frameworks)
+
+Do NOT worry if you see these annotations in User bean (Ignore them)

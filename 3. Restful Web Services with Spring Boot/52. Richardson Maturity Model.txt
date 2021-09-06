@@ -1,0 +1,17 @@
+1. Richardson Maturity Model:
+
+   a. Level 0: Expose SOAP web services in Rest Style
+      Eg: actions like
+		http://server/getPosts
+		http://server/deletePosts
+		http://server/doThis
+
+   b. Level 1: Expose Resources with Proper URI
+      Eg: actions like
+		http://server/accounts
+		http://server/accounts/10
+   c. Level 2 = Level 1 + proper use of HTTP methods
+
+   d. Level 3 = Level 2 + HATEOAS
+      i.e. Data + Next Possible Actions link if possible
+

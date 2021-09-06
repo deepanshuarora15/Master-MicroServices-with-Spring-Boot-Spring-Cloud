@@ -1,0 +1,19 @@
+1. Consumer First
+2. Proper documentation via Swagger
+3. Use proper protocols such as GET, DELETE, POST
+4. Response Status:
+
+200 : Success
+404 : Resource Not Found
+400 : Bad Request
+201 : Created
+401 : Unauthorized
+500 : Server Error
+
+5. Always use plurals in the URI.
+   /user wrong
+   /users correct
+
+6. When you think of Resources, always think in terms of noun and not verb.
+   Eg: user Ok
+      deleteuser not ok	

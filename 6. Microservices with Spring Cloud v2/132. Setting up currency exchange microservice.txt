@@ -1,0 +1,7 @@
+1. Setup a new Spring Boot project 'currency-exchange-service' with 4 added dependencies:
+   Spring Boot DevTools, Spring Boot Actuator, Spring Web, Spring Config Client	
+
+2. In the newly setup currency exchange microservice, we will add the following commands to application.properties
+spring.application.name=currency-exchange
+server.port=8000
+spring.config.import=optional:configserver:http://localhost:8888

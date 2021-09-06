@@ -1,0 +1,13 @@
+1. Now we would be moving to a centralized config server.
+2. Create a new spring initialzr project. Create a new artifact 'spring-cloud-config-server'
+3. Add dependencies:
+   a. Spring Boot Dev Tools
+   b. Config Server : used fot Git, SVN and other version control systems
+4. Import the existing Maven project and proceed. if you run the app, the app won't run due to port clashes. By default the micro
+   service would try and run on port 8080, which is alreayd in use by our limit-service. So we need to alter the port
+   of the current microservice to 8888.
+   Go to application.properties and write the following command
+   server.port=8888
+
+5. Also we change the name of the application via application.properties:
+   spring.application.name = spring-cloud-config-server

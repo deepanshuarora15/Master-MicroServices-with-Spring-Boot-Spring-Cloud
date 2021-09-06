@@ -1,0 +1,38 @@
+1. In java we have objects. In RDBMS, we have tables. 
+2. In M:N relationships such as Example: An employee can undertake multiple tasks. A task can be undertaken by multiple employees
+   at once.
+3. The way we achieve this in databases is:
+   Form a new table with foreign keys from 'Employee' table and from 'Tasks' table.
+4. The way we achieve this in Java is: 
+   Form a class 'Employee' and 'Tasks'. In employee class, we will write a method that returns a list of tasks.
+   Similarly, for Tasks class, we return a list of Employees.
+5. Another scenario:
+   public class Employee
+
+   public class FullTimeEmployee extends Employee{
+	protected Integer salary;
+}
+
+   public class PartTimeEmployee extends Employee{
+	protected float hourlyWage;
+}
+
+
+For this SQL table will be 
+
+
+create table employee
+(
+employee_type varchar(31) not null,
+id BIGINT not null,
+city varchar(255),
+state varchar(255),
+street varchar(255),
+zip varchar(255),
+
+hourly_wage Float, // part time emp
+
+salary INTEGER, // full time emp
+)
+
+

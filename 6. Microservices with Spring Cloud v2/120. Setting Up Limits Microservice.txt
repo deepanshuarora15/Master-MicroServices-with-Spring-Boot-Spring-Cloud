@@ -1,0 +1,15 @@
+1. Create a new Spring initialzr project and call it 'limits-service' with dependencies:
+   a. Spring Web
+   b. Spring Boot DevTools : helps with live reloads
+   c. Spring Boot Actuator
+   d. Config Client : required to speak to config server
+2. Set up the exisiting Maven project like earlier.
+3. Make sure that your project full qualified address does not contain any whitespaces, as it might cause issues with Spring cofig.
+4. As we have made use Spring config client, we need to add the following command to application.properties:
+   spring.config.import=optional:configserver:http://localhost:8888
+   We chose port 8888 as we plan ti run the config server on port 8888 later.
+5. Optional here means that we are not gonna be connecting to the server right now. Once we are ready with all the setups, then only are
+   we gonna be using it.
+
+6. Imp: As we have added COnfig client in the dependencies of 'limit-service', as a result of that it is compulsory to follow step4.
+   You cannot run the app without giving the Spring config server details in the application.properties now.

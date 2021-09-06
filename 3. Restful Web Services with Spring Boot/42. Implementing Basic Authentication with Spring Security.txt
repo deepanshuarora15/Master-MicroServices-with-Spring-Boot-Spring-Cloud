@@ -1,0 +1,22 @@
+1. A simple way of authentication is via username & password.
+2. A more sophisticated way is to create a password digest. So the actual password is not sent to the server, but the digest
+   is carried to it.
+3. <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+4. Now whenever you start your Spring Boot app, there would be a password in the logs in the console section.
+5. In Postman, fire a 'GET' request. Under authorization select Type = Basic Auth
+   Username = user
+   Password = 6fea3feb-79a3-4acb-9d7c-4c350985dc99
+
+Only when you provide credentials under Authorization, would you e able to fulfil your GET or PUT requests.
+
+6. On every re-run of the application, a new password is generated. 
+7. In application.properties we need to set the credentials for once & all
+
+spring.security.user.name=user
+spring.security.user.password=password
+
+ 

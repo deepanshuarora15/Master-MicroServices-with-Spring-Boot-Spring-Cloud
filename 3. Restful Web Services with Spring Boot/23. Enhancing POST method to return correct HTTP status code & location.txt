@@ -1,0 +1,16 @@
+1. In the POST method, we need to send an acknowledgement to client, citing the HTTP status code like 201.
+   201 code is auto sent. But other stuff has to be done manually.
+   We need to send the URI created.
+2. @PostMapping("/users")
+	public ResponseEntity<Object> createUser(@RequestBody User user) {
+		User savedUser = service.save(user);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
+		return ResponseEntity.created(location).build();
+	}
+
+3. The code that we wrote in last session was OK too, but the above is better. 
+   HTTP status code 201 is returned which is OK for POST method.
+   Also in the response -> Headers -> Location -> http://localhost:8080/users/5 
+   i.e. URI of the new posted resource is also given out
+
+4. The user can now test the above URI using GET to verify, if the user was posted correctly or not.

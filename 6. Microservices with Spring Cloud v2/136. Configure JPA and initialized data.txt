@@ -1,0 +1,38 @@
+1.
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+
+2. <dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+   </dependency>
+
+3. Any changes made to pom.xml will not auto-reflect by Spring Dev Tools. An explicit stoppage and starting of the server is required.
+
+4. Application.properties
+
+
+spring.jpa.show-sql=true
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.h2.console.enabled=true
+spring.jpa.defer-datasource-initalization=true
+
+5. 'Expected identifier error' in SQL means we have mistakenly used a SQL keyword inside our Entity Bean.
+    We will fix it by: 
+    @Column(name="currency_from")
+    private String from;
+
+6. Data.sql
+
+insert into CURRENCY_EXCHANGE(id, currency_from, currency_to, conversion_multiple, environment) values(1001, 'USD', 'INR', 65, '');
+insert into CURRENCY_EXCHANGE(id, currency_from, currency_to, conversion_multiple, environment) values(1002, 'EUR', 'INR', 65, '');
+insert into CURRENCY_EXCHANGE(id, currency_from, currency_to, conversion_multiple, environment) values(1003, 'AUD', 'INR', 65, '');
+
+7. camelCase in Java changes to underscore in SQL.
+   Eg: currencyConverter attribute in Java would map to Currency_Converter in SQL
+
+

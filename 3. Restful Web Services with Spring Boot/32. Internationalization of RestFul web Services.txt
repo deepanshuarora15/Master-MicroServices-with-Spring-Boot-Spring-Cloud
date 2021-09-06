@@ -1,0 +1,19 @@
+1. Internalizationalor i18n means customizing your services for different people around the world.
+2. Eg: different peiple from different countries might spek different langauge? How can you customize your web pages
+   as per the language of the customer?
+3. in the resource folder, we need to add files like
+   messages.properties
+   messages_fr.properties
+4. 
+
+import org.springframework.context.MessageSource;
+
+@GetMapping(path="/hello-world-internationalized")
+	public String internationalized(@RequestHeader(name="Accept-Language", required=false) Locale locale) {
+		return messageSource.getMessage("good.morning.message", null, "Default Message", locale);
+	}
+
+5. In message.properties, set
+good.morning.message = Good Morning
+
+

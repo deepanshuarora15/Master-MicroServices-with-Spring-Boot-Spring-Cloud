@@ -1,0 +1,12 @@
+1. It is possible to get an id or a name attahced to the URL, when getting a client request. The path for that is clear,
+   and is written like @GetMapping(path="/hello-world/path-variable/{name}")
+
+2. The way it is mapped to the function body is defined below. @PathVariable annotation is used. 
+
+	@GetMapping(path="/hello-world/path-variable/{name}")
+	public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
+		return new HelloWorldBean(String.format("Hello World %s", name));
+	}
+
+3. @PathVariable is an important annotation that functions as a parameter to the function body.
+

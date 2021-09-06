@@ -1,0 +1,78 @@
+1. What we have done till now is to create a Limit bean and then from the controller class, return the Bean
+   return new Limits(1, 1000);
+   But this was all hard coded : the value of minimum and maximum were setup manually by us.	
+
+2. In this step we are gonna setup the configurations using application.properties of the 'limits-service'
+3. Inside the application.properties file:
+
+spring.config.import=optional:configserver:http://localhost:8888
+limits-service.minimum=2
+limits-service.maximum=998
+
+But the job is not done yet. our app is still gonna pick up values (1,1000) only. But we now want that it should pick up values
+rather from our application.properties configuration. We will do that by creating a new Configuration.java bean.
+
+4. limits-service in the Step 4 command is gonna be used in an annotation as we are gonna be seeing now.
+5. Create a new subpackage called Configuration. Inside the sub-package we create a class called Configuration.java
+6. Configuration.java:
+
+package com.microservices.limitsservice.configuration;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties("limits-service")   /// Imp: The name used over has to match the name that you are mentioning in 
+					     /// application.properties
+public class Configuration {
+	private int minimum;
+	private int maximum;
+	public int getMinimum() {
+		return minimum;
+	}
+	public void setMinimum(int minimum) {
+		this.minimum = minimum;
+	}
+	public int getMaximum() {
+		return maximum;
+	}
+	public void setMaximum(int maximum) {
+		this.maximum = maximum;
+	}
+	@Override
+	public String toString() {
+		return "Configuration [minimum=" + minimum + ", maximum=" + maximum + "]";
+	}
+	
+}
+
+
+7. Inside the LimitsController.java
+
+
+Imp: See that we are not using the setter methods of Configuration class ever. They are gonna be used behind the scenes, to set the
+     values as picked up from Configuration.java
+
+package com.microservices.limitsservice.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.microservices.limitsservice.bean.Limits;
+import com.microservices.limitsservice.configuration.Configuration;
+
+@RestController
+public class LimitsController {
+	
+	@Autowired
+	private Configuration configuration;
+	@GetMapping(path="/limits")
+	public Limits retrieveLimits() {
+		//return new Limits(1,1000);
+		return new Limits(configuration.getMinimum(), configuration.getMaximum());
+	}
+}
+
+
+ 

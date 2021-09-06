@@ -1,0 +1,57 @@
+1. For checking the API, press Ctrl+Shift+J on Google Chrome.
+2. Go to network tab.
+3. Hit the URL again. A network request would be sent out and a response would be received.
+4. Select All. There you would API resource that you hit. Select that and you would find options such as
+   a. headers
+   b. Preview
+   c. Response
+   d. initiator
+   e. Timing
+   f. Cookies
+5. For using the GET requests, we either go for a brute force GET or we go for a GET by id.
+   In former case, we do nothing. In latter case, we use @PathVariable inside the function body.
+6. In case of Post, elementary data types are not used. Model classes are used generally as arguments to the function body.
+   Also, Post requests are not made directly via browser. You either need to build the front end for it, or you can use a tool
+   such as Postman.
+7. package com.rest.webservices.restfulwebservices.user;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserResource {
+	
+	@Autowired
+	private UserDaoService service;
+	
+	@GetMapping(path="/users")
+	public List<User> retrieveAllUsers(){
+		System.out.println(service.findAll());
+		return service.findAll();
+	}
+	
+	@GetMapping("/users/{id}")
+	public User retrieveUser(@PathVariable int id) {
+		return service.findOne(id);
+	}
+	
+	@PostMapping("/users")
+	public void createUser(@RequestBody User user) {
+		User savedUser = service.save(user);
+	}
+}
+
+8. While using Postman, POST service, enter the URL. 
+   Select body->'raw'-> 
+{
+        "name": "Adam",
+        "birthdate": "2021-08-28T16:38:07.306+00:00"
+}
+
+and hit 'send'.
